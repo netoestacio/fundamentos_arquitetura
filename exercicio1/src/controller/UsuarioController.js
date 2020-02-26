@@ -24,17 +24,17 @@ class UsuarioController {
 
     }
 
-    async update() {
+    async update(req, res) {
         const usuario = await UsuarioModel.findOneAndUpdate(req.query, req.body, {new: true})
         return res.json(usuario)
     }
 
-    async delete() {
+    async delete(req,res) {
         const usuario = await UsuarioModel.deleteOne(req.query, req.body)
         return res.json(usuario)
     }
 
-    async findOne() {
+    async findOne(req,res) {
         const usuario = await UsuarioModel.findOne(req.query, req.body)
         if(!usuario){
             return res.send('User not Found')

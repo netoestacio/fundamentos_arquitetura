@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 
 const LocacaoSchema = new mongoose.Schema({
-    id: Number,
     dataLocacao: String,
     dataEntrega: String,
     dataPrazo: String,
