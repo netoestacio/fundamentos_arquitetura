@@ -14,14 +14,13 @@ class LivroController {
     async store(req, res) {
         const { titulo, autor, genero } = req.body
 
-        const livro = await LivroModel.findOne({titulo, autor, genero})
+        let livro = await LivroModel.findOne({titulo, autor, genero})
 
-        if(!livro){
+        if(!livro) {
             livro = await LivroModel.create({titulo, autor, genero})
         }
 
         return res.json(livro)
-
     }
 
     async update(req, res) {

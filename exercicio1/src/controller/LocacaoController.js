@@ -13,12 +13,12 @@ class LocacaoController {
     }
 
     async store(req, res) {
-        const { dataLocacao, dataEntrega, dataPrazo, id__livro, id_usuario } = req.body
+        const { dataLocacao, dataEntrega, dataPrazo, id_livro, id_usuario } = req.body
 
-        const locacao = await LocacaoModel.findOne({dataLocacao, dataEntrega, dataPrazo, id__livro, id_usuario})
+        let locacao = await LocacaoModel.findOne({dataLocacao, dataEntrega, dataPrazo, id_livro, id_usuario})
 
         if(!locacao) {
-           locacao = LocacaoModel.create({dataLocacao, dataEntrega, dataPrazo, id__livro, id_usuario})
+            locacao = await LocacaoModel.create({dataLocacao, dataEntrega, dataPrazo, id_livro, id_usuario})
         }
 
         return res.json(locacao)
