@@ -1,9 +1,10 @@
 const router = require('express').Router()
-const UsuarioController = require('../controller/UsuarioController')
+const userRoutes =  require('../routes/usuarioRouter')
+const livrosRoutes = require('../routes/livrosRouter')
+const locacaoRoutes = require('../routes/locacaoRouter')
 
-router.get('/usuario', UsuarioController.index)
-router.post('/usuario', UsuarioController.store)
-router.put('/usuario', UsuarioController.update)
-router.delete('/usuario', UsuarioController.delete)
+router.use(userRoutes)
+router.use(livrosRoutes)
+router.use(locacaoRoutes)
 
 module.exports = router
