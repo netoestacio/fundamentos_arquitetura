@@ -4,7 +4,7 @@
   "description": "Escrever um pequeno sistema de qualquer tópico (exemplo biblioteca).",
   "main": "app.js",
   "scripts": {
-    "start": "node src/app.js",
+    "start": "nodemon src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -12,6 +12,7 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.9.2"
+    "mongoose": "^5.9.2",
+    "nodemon": "^2.0.2"
   }
 }
