@@ -14,26 +14,22 @@ class LocacaoController {
     }
 
     async getAllInfo(req, res){
-
-      const dataReq = await axios.get('https://localhost:2000/usuario')
+      await axios.get('http://localhost:1000/usuario')
         .then(function(response){
-          console.log(response.data); // ex.: { user: 'Your User'}
-          return response.data
+          console.log(response.data);
+          return res.json(response.data)
+        }).catch((err)=>{
+           return res.json(err)
         });
-
-        if(!dataReq) {
-            res.send('Erro to execute Http Request')
-        }
-
-        return res.json(dataReq)
-
     }
 
     async getAllBooks(req, res) {
-        await axios.get('localhost:2000/livros')
+        await axios.get('http://localhost:2000/livros')
           .then(function(response){
-            console.log(response.data); // ex.: { user: 'Your User'}
+            console.log(response.data);
             return res.json(response.data)
+          }).catch((err)=>{
+            return res.json(err)
           });
     }
 

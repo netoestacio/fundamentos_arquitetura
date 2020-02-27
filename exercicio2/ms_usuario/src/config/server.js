@@ -1,5 +1,5 @@
 require('dotenv').config();
-
+const cors = require('cors')
 const express = require('express')
 const mongoose = require('mongoose')
 
@@ -12,7 +12,7 @@ mongoose.connect('mongodb+srv://admin:admin@cluster0-0ccji.mongodb.net/test?retr
 app.use(express.json())
 
 app.use(express.urlencoded({extended: true}))
-
+app.use(cors())
 app.use(routes)
 
 module.exports = app;
