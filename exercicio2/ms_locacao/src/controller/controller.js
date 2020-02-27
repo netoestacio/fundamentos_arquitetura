@@ -1,5 +1,5 @@
 const LocacaoModel = require('../model/locacao')
-const https = require('https')
+const axios = require('axios')
 
 class LocacaoController {
 
@@ -15,54 +15,26 @@ class LocacaoController {
 
     async getAllInfo(req, res){
 
-        const options = {
-            hostname: 'localhost',
-            port: 1000,
-            path: '/usuario',
-            method: 'GET'
-          }
-        
+      const dataReq = await axios.get('https://localhost:2000/usuario')
+        .then(function(response){
+          console.log(response.data); // ex.: { user: 'Your User'}
+          return response.data
+        });
 
-        req = https.request(options, res => {
-            console.log(`statusCode: ${res.statusCode}`)
-          
-            res.on('data', d => {
-              process.stdout.write(d)
-              return res.json(d)
-            })
-          })
-          
-          req.on('error', error => {
-            console.error(error)
-          })
-          
-          req.end()
+        if(!dataReq) {
+            res.send('Erro to execute Http Request')
+        }
+
+        return res.json(dataReq)
+
     }
 
     async getAllBooks(req, res) {
-
-        const options = {
-            hostname: 'localhost',
-            port: 2000,
-            path: '/livros',
-            method: 'GET'
-          }
-
-          req = https.request(options, res => {
-            console.log(`statusCode: ${res.statusCode}`)
-          
-            res.on('data', d => {
-              process.stdout.write(d)
-              return res.json(d)
-            })
-          })
-          
-          req.on('error', error => {
-           return res.send('Error')
-          })
-          
-          req.end()
-
+        await axios.get('localhost:2000/livros')
+          .then(function(response){
+            console.log(response.data); // ex.: { user: 'Your User'}
+            return res.json(response.data)
+          });
     }
 
     async store(req, res) {
