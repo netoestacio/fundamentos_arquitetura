@@ -1,4 +1,5 @@
 const LocacaoModel = require('../model/locacao')
+const https = require('https')
 
 class LocacaoController {
 
@@ -10,6 +11,58 @@ class LocacaoController {
         }
 
         return res.json(locacao)
+    }
+
+    async getAllInfo(req, res){
+
+        const options = {
+            hostname: 'localhost',
+            port: 1000,
+            path: '/usuario',
+            method: 'GET'
+          }
+        
+
+        req = https.request(options, res => {
+            console.log(`statusCode: ${res.statusCode}`)
+          
+            res.on('data', d => {
+              process.stdout.write(d)
+              return res.json(d)
+            })
+          })
+          
+          req.on('error', error => {
+            console.error(error)
+          })
+          
+          req.end()
+    }
+
+    async getAllBooks(req, res) {
+
+        const options = {
+            hostname: 'localhost',
+            port: 2000,
+            path: '/livros',
+            method: 'GET'
+          }
+
+          req = https.request(options, res => {
+            console.log(`statusCode: ${res.statusCode}`)
+          
+            res.on('data', d => {
+              process.stdout.write(d)
+              return res.json(d)
+            })
+          })
+          
+          req.on('error', error => {
+           return res.send('Error')
+          })
+          
+          req.end()
+
     }
 
     async store(req, res) {
